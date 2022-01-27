@@ -1,112 +1,656 @@
-import java.util.Locale;
+//Trabalho Prático 1 (TP1) 
+//Pedro Lucas Figueiredo Santana
+//Matrícula : 202017049
+//Orientação à Objetos
+
+//bibliotecas usadas
 import java.util.Scanner;
+import java.util.Random;
+import java.util.Arrays;
 
-public class Main {
-
-	public static void main(String[] args) {
-
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
-		
-		int n, qtdpalavras, qtdtemas;
-
-	    System.out.print("Quantas temas serao digitados? ");
-	    n = sc.nextInt();
-
-        string[] palavras = new String[n];
-        string[] temas = new String[n];
-
-	    for (int i=0; i<n; i++) {
-	    	System.out.printf("Digite o tema : ", i + 1);
-	        temas[i] = sc.nextString();
-	        System.out.printf("Digite a palavra ", i + 1);
-	        palavras[i] = sc.nextString();
-	    }
-
-        System.out.printf("-----------------------------");
-        System.out.printf("-----------MENU------------");
-        System.out.printf("-----------------------------");
-        private void exibirMenu(){
-            System.out.println("| 01 - GERENCIAR TEMAS      |");
-		    System.out.println("| 02 - GERENCIAR PALAVRAS     |");
-		    System.out.println("| 03 - JOGAR       |");
-            System.out.println("| 04 - SAIR       |");   
-        }
+//inicio
+public class TP1{
+    public static void main(String[] args) {
         
-        private void gerenciarTemas(){
-            //CADASTRO
-            Scanner leitor = new Scanner(System.in);
-            Temas temas = new Temas();
-            System.out.print("Nome do Tema: ");
-		    leitor.nextLine();// limpa o scanner
-		    temas.setTemas(leitor.nextLine());
-		    temas.add(temas);
-		    
-		    //EXCLUSAO
-		    
-		    //BUSCA
-		    for(Temas temas : temas){
-			    System.out.println("\nNome do tema: " + temas.getIdTemas());
-			    System.out.println("\n\n");
-		}
-	}
-           
-        private void gerenciarPalavras(){
-            //CADASTRO
-            Scanner leitor = new Scanner(System.in);
-            Palavras palavrs = new Palavras();
-            System.out.print("Nome da Palavra: ");
-		    leitor.nextLine();// limpa o scanner
-		    palavras.setNomePalavras(leitor.nextLine());
-		    palavras.add(palavras);
-		    
-		    //EXCLUSAO
-		    
-		    //BUSCA
-		    for(Palavras palavras : palavras){
-			    System.out.println("\nNome da palavra: " + palavras.getIdPalavras());
-			    System.out.println("\n\n");
-		}
-		
-		    //LISTAGEM
-            
-        }
-        
-        private void jogar(){
-            for(Temas temas : temas){
-			    System.out.println("\nNome do tema: " + palavras.getIdTemas());
-			    System.out.println("\n\n");
-		}
-        
-        //RODADAS
-        
-        }
-        
+    public static int MAX = 51;
+	public static String[][] matrizGeral = new String[MAX][MAX];
+	
+//Declaração de variáveis.
+    int opcoes, escolha = 0, quantidadeTemas = 5, jogarNovamente;
+	String[][]  temasPalavras = new String[50][50];
+    Scanner ler = new Scanner(System.in);
+	int [] quantidadePalavras = new int[50];
+	char escolha = 0;
+	int repeat = 0;
+	
+//Usado para entrada de dados
+    Scanner ler = new Scanner(System.in);
     
-        public static void main(String[] args){
-		short opcao = 3;
-		Scanner leitor = new Scanner(System.in);
-		Teste teste = new Teste();
+//estrutura repetitiva
+        do {
+			Menu();
 
-		do{
-			teste.exibirMenu();
-		
-			System.out.print("Opção escolhida: ");
-			opcao = leitor.nextShort();
-			
-			switch(opcao){
-				case 1:
-					gerenciarTemas();
+			do {
+				System.out.print(" Escolha entre 1 e 4: ");
+				escolha = ler.next().charAt(0);
+				System.out.print("\n");
+
+				switch (escolha) {
+				case '1':
+					Opcao1();
+					repeat = 0;
 					break;
-				case 2:
-					gerenciarPalavras();
-				case 3:
-					jogar();
+				case '2':
+					Opcao2();
+					repeat = 0;
+					break;
+				case '3':
+					Opcao3();
+					repeat = 0;
+					break;
+				case '4':
+					repeat = 0;
+					break;
+				case '5':
+					Opcao5();
+					repeat = 0;
 					break;
 				default:
-					sair();
-			}
-		}while(opcao != 3);
+					System.out.print(" Escolhe entre 1 e 4\n\n");
+					repeat = 1;
+				}
+			} while (repeat == 1);
+		} while (escolha != '4');
 	}
-	sc.close();
+	
+	//MENU
+		public static void Menu() {
+		System.out.print("\n");
+		System.out.print("--------------------------------------------------\n\n");
+		System.out.print("------------------TP1--------------------------------\n");
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("---1)Gerenciar Temas\n");
+		System.out.print("---2)Gerenciar Palavras\n");
+		System.out.print("---3)Jogar\n");
+		System.out.print("---4)Sair\n");
+		System.out.print("---5)Colocar temas e palavras\n\n");
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("\n");
+	}
+	
+	//PRIMEIRO CASO
+	case 1: { // TEMA NOVO
+		for (int a = 0; a < MAX - 1; a++) {
+			if (matrizGeral[a][0] != null) {
+				if (matrizGeral[a][0].equals(tema) == true)
+					return 1; 
+				if (a == MAX - 2 && validador == 1)
+					return 2; 
+				} else if (validador == 1) {
+					matrizGeral[a][0] = tema.toUpperCase();
+					validador = 0;
+				}
+			}
+		}
+	break;
+
+    //SEGUNDO CASO
+    case 2: { // PALAVRA NOVA
+		for (int j = 1; j < MAX; j++) {
+			if (matrizGeral[cont][j] != null) {
+				if (matrizGeral[cont][j].equals(palavra) == true)
+					return 1; 
+				if (j == MAX - 1 && validador == 1)
+					return 2; 
+				} else if (validador == 1) {
+					matrizGeral[cont][j] = palavra.toUpperCase();
+					validador = 0;
+				}
+			}
+		}
+	break;
+	
+	//TERCEIRO CASO
+	case 3: { // FALA OS TEMAS
+	for (int a = 0; a < MAX - 1; a++) {
+		if (matrizGeral[a][0] != null)
+			System.out.print(" " + (a + 1) + "- " + matrizGeral[a][0] + "\n");
+			else {
+				if (a == 0)
+					return -1; 
+				else
+					return a;
+				}
+			}
+		return MAX - 1;
+		}
+		
+	case 4: { // Exclusão do tema escolhido
+		if (matrizGeral[cont][1] == null) {
+			matrizGeral[cont][0] = null;
+		} else {
+			return 4; // Existem palavras cadastradas nesse tema
+		}
+		for (int a = cont; a < MAX - 1; a++) {
+			for (int j = 0; j < MAX; j++) {
+				matrizGeral[a][j] = matrizGeral[a + 1][j];
+			}
+		}
+	}
+		break;
+		
+	case 5: { // PROCURAR TEMA
+		for (int a = 0; a < MAX - 1; a++)
+		if (matrizGeral[a][0] == null && validador == 1) {
+			return 5; 
+			} else if (validador == 1 && matrizGeral[a][0].equals(tema) == true) {
+				if (matrizGeral[a][1] != null) {
+					System.out.print(" " + matrizGeral[a][0] + "| ");
+					validador = 0;
+					for (int j = 1; j < MAX - 1; j++)
+						if (matrizGeral[a][j] != null)
+							System.out.print(" " + (j) + "- " + matrizGeral[a][j] + " / ");
+					} else
+						return -1; 
+				}
+		}
+		break;
+		
+		case 6: { // EXCLUSÃO
+			for (int j = 1; j < MAX; j++) {
+				if (matrizGeral[cont][j] != null)
+					if (matrizGeral[cont][j].equals(palavra) == true) {
+						matrizGeral[cont][j] = null;
+						for (; j < MAX - 1; j++)
+							matrizGeral[cont][j] = matrizGeral[cont][j + 1];
+						return 0;
+					}
+			}
+			return 6; 
+		}
+		
+		case 7: { // Buscar palavra
+		for (int a = 0; a < MAX - 1; a++)
+			for (int j = 0; j < MAX; j++)
+			if (matrizGeral[a][j] != null) {
+				if (j != 0 && matrizGeral[a][j].equals(palavra) == true) {
+				    System.out.print("  A palavra " + palavra + " está cadastrada no tema " + matrizGeral[a][0] + "! \n");
+						validador = 0;
+						}
+				} else if (matrizGeral[a][0] == null && validador != 0)
+					return 6; // Palavra não encontrada
+
+		}
+		break;
+		
+		case 8: { // PALAVRA SORTEADA
+		Random random = new Random();
+		int totalPalavras = 0;
+		for (int j = 1; j < MAX; j++){
+		    if (matrizGeral[cont][j] != null)
+				totalPalavras = totalPalavras + 1;
+			if (totalPalavras != 0) {
+				int escolhida = random.nextInt(totalPalavras);
+				if (escolhida == 0)
+					escolhida = escolhida + 1;
+				return escolhida;
+			} else {
+				return -1; 
+			}
+		}
+		}
+		return 0; 
+	}
+	
+	// GERENCIAR TEMAS
+	public static int Opcao1() {
+		int repeat = 0;
+		char escolha;
+		Scanner ler = new Scanner(System.in);
+		System.out.println("\n------------------------------");
+		System.out.println("\nGERENCIADOR DE TEMAS");
+        System.out.println("1-Cadastro");
+        System.out.println("2-Exclusão");
+        System.out.println("3-Busca");
+		System.out.println("4-Voltar ao menu principal");
+		System.out.println("\n------------------------------");
+		do {
+			System.out.print(" Escolha a opção(1 a 4): ");
+			escolha = ler.next().charAt(0);
+			System.out.print("\n");
+			switch (escolha) {
+			case '1':
+				Opcao1_();
+				repeat = 0;
+				break;
+			case '2':
+				Opcao1_2();
+				repeat = 0;
+				break;
+			case '3':
+				Opcao1_3();
+				repeat = 0;
+				break;
+			case '4':
+				return 0;
+			default:
+				System.out.print(" COLOCA UMA OPÇÃO ENTRE 1 A 4\n\n");
+				repeat = 1;
+			}
+		} while (repeat == 1);
+		return 0;
+	}
+	
+	// COLOCAR TEMA
+	public static void Opcao1_() {
+		Scanner ler = new Scanner(System.in);
+		String tema;
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("COLOCAR TEMA\n");
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("COLOQUE O TEMA PARA CADASTRAR: ");
+		tema = ler.nextLine();
+		System.out.print("\n");
+		switch (BancoDados(1, 0, tema.toUpperCase(), null)) {
+		case 0:
+			System.out.print("TEMA COLOCADO\n");
+			break;
+		case 1:
+			System.out.print("TEMA EXISTE \n");
+			break;
+		case 2:
+			System.out.print("LIMITE EXCEDIDO\n");
+			break;
+		}
+
+	}
+	
+    // EXCLUIR TEMA
+	public static void Opcao1_2() {
+		Scanner ler = new Scanner(System.in);
+		int escolha = 0;
+		int retorno;
+		int tentativas = 0;
+		boolean validaErro = false;
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("               EXCLUIR TEMA\n");
+		System.out.print("-------------------------------------------------\n\n");
+		retorno = BancoDados(3, 0, null, null);
+		switch (retorno) {
+		case -1:
+			System.out.print(" NAO TEM ESSE TEMA!\n\n");
+			break;
+		default: {
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print("  NUMERO DO TEMA PARA EXCLUIR: ");
+			do {
+				if (tentativas != 0) {
+					ler.nextLine();
+				}
+				tentativas = 1;
+
+				if (ler.hasNextInt()) {
+					escolha = ler.nextInt();
+					System.out.print("\n");
+
+					if (escolha <= retorno && escolha > 0)
+						validaErro = true;
+					else {
+						System.out.print("ESCOLHA DE 1 A " + retorno + "\n  > ");
+					}
+				} else {
+					System.out.print(" COLOQUE UM NUMERO \n");
+					System.out.print(">  ");
+				}
+			} while (!validaErro);
+
+			switch (BancoDados(4, escolha, null, null)) {
+			case 0:
+				System.out.print("EXCLUIU!\n ");
+				break;
+			case 4:
+				System.out.print(" JA EXISTE\n ");
+				break;
+			}
+		}
+			break;
+		}
+	}
+	
+	// ACHAR TEMA
+	public static void Opcao1_3() {
+		Scanner ler = new Scanner(System.in);
+		String tema;
+		int validador = 0;
+		while (validador != 2) {
+			boolean validaErro = false;
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print("                  ACHAR TEMA\n");
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print("  TEMA PARA ACHAR: ");
+			tema = ler.next();
+			System.out.print("\n");
+			switch (BancoDados(5, 0, tema.toUpperCase(), null)) {
+			case 0:
+				break;
+			case 5:
+				System.out.print("  TEMA NAO ACHADO ");
+				break;
+			}
+			System.out.print("\n\nQUER ACHAR DE NOVO?n\n ");
+			System.out.print(" 1)Sim \n ");
+			System.out.print(" 2)Não \n\n ");
+			System.out.print(" >  ");
+			int escolha = 0;
+			do {
+				if (ler.hasNextInt()) {
+					escolha = ler.nextInt();
+					System.out.print("\n");
+					switch (escolha) {
+					case 1:
+						validaErro = true;
+						break;
+					case 2:
+						validaErro = true;
+						validador = 2;
+						break;
+					default:
+						System.out.print("\n  OPCAO 1 OU 2 \n");
+						System.out.print(" > ");
+					}
+				} else {
+					System.out.print("  COLOCA UM NUMERO \n");
+					System.out.print("  > ");
+					ler.nextLine();
+				}
+			} while (!validaErro);
+		}
+	}
+	
+	// GERENCIAR PALAVRA
+	public static int Opcao2() {
+		int repeat = 0;
+		char escolha = '0';
+		boolean validaErro = false;
+		Scanner ler = new Scanner(System.in);
+		System.out.print("--------------------------------------------------\n\n");
+		System.out.print("               GERENCIAR PALAVRAS\n");
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("  1)Cadastrar\n");
+		System.out.print("  2)Excluir\n");
+		System.out.print("  3)Buscar\n");
+		System.out.print("  4)Voltar ao Menu\n\n");
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print(" OPCAO DE 1 A 4: ");
+		do {
+			escolha = ler.next().charAt(0);
+			switch (escolha) {
+			case '1':
+				validaErro = true;
+				Opcao21();
+				break;
+			case '2':
+				validaErro = true;
+				Opcao22();
+				break;
+			case '3':
+				validaErro = true;
+				Opcao23();
+				break;
+			case '4':
+				validaErro = true;
+				break;
+			default:
+				System.out.print("\n OPCAO DE 1 A 4 \n");
+				System.out.print("  R: ");
+			}
+		} while (!validaErro);
+		return 0;
+	}
+	
+// COLOCAR PALAVRA
+	public static void Opcao21() {
+		Scanner ler = new Scanner(System.in);
+		String palavra;
+		int escolha = 0;
+		boolean validaErro = false;
+		int retorno;
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("             COLOCAR PALAVRA \n");
+		System.out.print("-------------------------------------------------\n\n");
+		retorno = BancoDados(3, 0, null, null);
+		switch (retorno) {
+		case -1:
+			System.out.print(" NAO TEM TEMA\n\n");
+			break;
+		default: {
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print(" QUAL TEMA PARA CADASTRAR A PALAVRA : ");
+			do {
+				if (ler.hasNextInt()) {
+					escolha = ler.nextInt();
+					System.out.print("\n");
+					if (escolha <= retorno && escolha > 0)
+						validaErro = true;
+					else
+						System.out.print(" COLOQUE DE 1 A " + retorno + "\n  > ");
+				} else {
+					ler.nextLine();
+					System.out.print("COLOQUE UM NUMERO \n");
+					System.out.print(" >");
+				}
+			} while (!validaErro);
+			System.out.print("\n");
+			System.out.print("  COLOQUE A PALAVRA PARA CADASTRAR ");
+			ler.nextLine();
+			palavra = ler.nextLine();
+			System.out.print("\n");
+			switch (BancoDados(2, escolha, null, palavra.toUpperCase())) {
+			case 0:
+				System.out.print(" CADASTROU \n\n");
+				break;
+			case 1:
+				System.out.print("  JA EXISTE\n\n");
+				break;
+			case 2:
+				System.out.print("  LIMITE EXCEDIDO!\n\n");
+				break;
+			}
+		}
+			break;
+		}
+	}
+	
+	// ELIMINAR PALAVRA
+	public static void Opcao22() {
+		Scanner ler = new Scanner(System.in);
+		String palavra;
+		int escolha = 0;
+		boolean validaErro = false;
+		int tentativas = 0;
+		System.out.print("-------------------------------------------------\n\n");
+		System.out.print("                 ELIMINAR PALAVRA\n");
+		System.out.print("-------------------------------------------------\n\n");
+		int retorno = BancoDados(3, 0, null, null);
+		switch (retorno) {
+		case -1:
+			System.out.print("NAO TEM TEMA\n\n");
+			break;
+		default: {
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print(" QUAL TEMA PARA TIRAR A PALAVRA ");
+			do {
+				if (tentativas != 0)
+					ler.nextLine();
+				tentativas = 1;
+				if (ler.hasNextInt()) {
+					escolha = ler.nextInt();
+					System.out.print("\n");
+					if (escolha <= retorno && escolha > 0)
+						validaErro = true;
+					else
+						System.out.print("OPCAO DE 1 A " + retorno + "\n  > ");
+				} else {
+					System.out.print("COLOQUE UM NUMERO \n");
+					System.out.print("> ");
+				}
+			} while (!validaErro);
+			if (BancoDados(5, 0, matrizGeral[escolha - 1][0], null) != -1) {
+				System.out.print("\n\n");
+				System.out.print("COLOQUE A PALAVRA PARA TIRAR : ");
+				ler.nextLine();
+				palavra = ler.nextLine();
+				System.out.print("\n");
+				switch (BancoDados(6, escolha, null, palavra.toUpperCase())) {
+				case 0:
+					System.out.print("PALAVRA EXCLUIU\n");
+					break;
+				case 6:
+					System.out.print(" PALAVRA NAO ACHADA\n");
+					break;
+				}
+			} else
+				System.out.print("NAO EXISTE ESSA PALAVRA\n");
+		}
+			break;
+		}
+	}
+	
+	// PROCURAR PALAVRA
+	public static void Opcao23() {
+		Scanner ler = new Scanner(System.in);
+		String palavra;
+		int escolha = 0;
+		while (escolha != 2) {
+			int validador = 0;
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print("                ACHAR A PALAVRA \n");
+			System.out.print("-------------------------------------------------\n\n");
+			System.out.print(" COLOQUE A PALAVRA PARA ACHAR: ");
+			palavra = ler.next();
+			System.out.print("\n");
+			switch (BancoDados(7, 0, null, palavra.toUpperCase())) {
+			case 0:
+				while (validador == 0) {
+					System.out.print("\n QUER CONTINUAR? \n\n ");
+					System.out.print("  1)Sim \n ");
+					System.out.print("  2)Não \n\n ");
+					System.out.print("  > ");
+					escolha = ler.nextInt();
+					if (escolha != 1 && escolha != 2) {
+						System.out.print(" COLOQUE OPCAO 1 OU 2 \n");
+					} else {
+						validador = 1;
+					}
+				}
+				break;
+			case 6:
+				System.out.print("  PALAVRA NAO ACHADA \n");
+				while (validador == 0) {
+					System.out.print("\n  QUER CONTINUAR ? \n\n ");
+					System.out.print("  1)Sim \n ");
+					System.out.print("  2)Não \n\n ");
+					System.out.print("  >  ");
+					escolha = ler.nextInt();
+					if (escolha != 1 && escolha != 2) {
+						System.out.print("  ESCOLHA 1 OU 2 \n");
+					} else {
+						validador = 1;
+					}
+				}
+				break;
+			}
+			if (escolha != 1 && escolha != 2)
+				System.out.print(" ESCOLHA 1 OU 2\n");
+		}
+	}
+	
+	//TODOS AS VARIAVEIS USADAS NO JOGO
+	public static void Opcao3(){
+		Random palavraJogada = new Random();
+		String tema, palavra = "20";
+		char digito;
+		char [] letrasDigitadas = new char[50];
+		char [] digitoPalavra = new char[50];
+		Scanner ler = new Scanner(System.in);
+		int i = 0, j = 0, buscaTema = 0, erro = 0, certo = 0, cont = 0, tamanhoPalavra = 0, palavraUsada = 0;
+		int escolha = 0, palavra, retorno;
+		boolean validaErro = False;
+		Scanner ler = new Scanner(System.in);
+		String palavraChave = matrizGeral[tema][palavra];
+		int tamString = palavraChave.length();
+		String palavraAdivinhada = "";
+		int escolha = 0;
+		char[] letrasEscolhidas = new char[MAX];
+		String letrasUsadas = "";
+		int tentativas = 0;
+		int erros = 0;
+		int ganhou = 0;
+		char letra;
+
+//INICIO DO JOGO
+		System.out.println("\nCOLOQUE O TEMA PARA COLOCAR: ");
+		tema = ler.nextLine();
+//LAÇO DE REPETIÇÃO
+		for(i = 0; i <= quantidadeTemas; i++){
+			buscaTema = 1;
+			if(tema.equalsIgnoreCase(temasPalavras[i][0])){
+				if(quantidadePalavras[i] == 0){ 
+					System.out.println("\nTEMA SEM PALAVRAS");
+					return;
+				}
+				palavraUsada = palavraJogada.nextInt(quantidadePalavras[i]); 
+				if(palavraUsada == 0){
+					palavraUsada++;
+				}
+				palavra = temasPalavras[i][palavraUsada]; 
+				buscaTema = 0;
+				break;
+			}else{
+				buscaTema++;
+			}	
+		}
+		if(buscaTema == 0){ 
+			palavra = palavra.toLowerCase();
+			digitoPalavra = palavra.toCharArray();
+			do{ 
+				System.out.println("\nEscolha uma letra: ");
+				digito = ler.next().charAt(0);
+				for (i = 0; i <= cont; i++){
+					if(digito == letrasDigitadas[i]){ 
+						while(digito == letrasDigitadas[i]){ 
+							System.out.println("\nLetra já digitada. Digite novamente: ");
+							digito = ler.next().charAt(0);
+						}
+						break;
+					}
+				} 
+				letrasDigitadas[cont] = digito;
+				cont++;
+				tamanhoPalavra = palavra.length();
+				if(palavra.contains(Character.toString(digito)) == false){ 
+					erro++;
+					System.out.println("\nERROU !");
+				}
+				for(j = 0; j < tamanhoPalavra; j++){ 
+					if(digito == digitoPalavra[j]){ 
+						certo++;
+						System.out.println("\nACERTOU");
+					}
+				}
+				if(erro > 5){ 
+					System.out.println("PERDEU");
+					break;
+				}
+			}while(certo < tamanhoPalavra);
+			if(certo == tamanhoPalavra){ 
+				System.out.println("ACERTOU");
+			}
+		}else{
+			System.out.println("\nTEMA NAO ACHADO!");
+		}
+	}
+
+
 }
+
